@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await authAPI.getCurrentUser();
-      setUser(response.data.user);
+      setUser(response.user);
     } catch (error) {
       console.error("Auth check failed:", error);
       localStorage.removeItem("token");
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       const response = await authAPI.googleLogin(credentialResponse.credential);
 
-      if (response.data.success) {
+      if (response.success) {
         const { token: newToken, user: userData } = response.data;
 
         localStorage.setItem("token", newToken);
