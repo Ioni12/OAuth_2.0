@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.googleLogin(credentialResponse.credential);
 
       if (response.success) {
-        const { token: newToken, user: userData } = response.data;
+        const { token: newToken, user: userData } = response;
 
         localStorage.setItem("token", newToken);
         setToken(newToken);
