@@ -33,19 +33,9 @@ api.interceptors.response.use(
 
 export const authAPI = {
   googleLogin: async (credential) => {
-    const response = await fetch(
-      "https://oauth-2-0.onrender.com/api/auth/google",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ credential }),
-      }
-    );
-    return response.json();
+    const response = await api.post("/api/auth/google", { credential });
+    return response.data;
   },
-  // ... other methods
 };
 
 export default api;
