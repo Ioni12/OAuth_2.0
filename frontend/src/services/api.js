@@ -33,8 +33,26 @@ api.interceptors.response.use(
 
 export const authAPI = {
   googleLogin: async (credential) => {
-    const response = await api.post("/api/auth/google", { credential });
-    return response.data;
+    try {
+      const response = await fetch(`${API_URL}/api/auth/google`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ credential }),
+      });
+
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
+
+      const data = await response.json();
+      console.log("Backend response:", data);
+
+      return data;
+    } catch (error) {
+      console.error("Fetch error:", error);
+      throw error;
+    }
   },
 };
 
